@@ -1,1 +1,1 @@
-export * from './lib/common';
+export * from './infra/mntc-id/object-id';
