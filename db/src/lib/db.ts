@@ -8,8 +8,8 @@ export interface BaseSchema {
 export interface TaskTable extends BaseSchema {
     id: Buffer,
     name: string,
-    description: string,
-    due_date: Date,
+    description?: string,
+    due_date?: Date,
 
 }
 

@@ -4,7 +4,8 @@
     "license": "MIT",
     "scripts": {
         "migration:generate": "npx kysely migrate:make --cwd ./db",
-        "migration:run": "npx kysely migrate:latest --cwd ./db"
+        "migration:run": "npx kysely migrate:latest --cwd ./db",
+        "migration:down": "npx kysely migrate:down --cwd ./db"
     },
     "private": true,
     "dependencies": {
