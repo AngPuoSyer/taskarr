@@ -8,5 +8,9 @@ export type TaskProps = {
 }
 
 export class TaskEntity {
-	constructor(private readonly props: TaskProps) { }
+	constructor(public props: TaskProps) { }
+
+	static create(props: TaskProps): TaskEntity {
+		return new TaskEntity(props)
+	}
 }
