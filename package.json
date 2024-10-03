@@ -5,7 +5,8 @@
     "scripts": {
         "migration:generate": "npx kysely migrate:make --cwd ./db",
         "migration:run": "npx kysely migrate:latest --cwd ./db",
-        "migration:down": "npx kysely migrate:down --cwd ./db"
+        "migration:down": "npx kysely migrate:down --cwd ./db",
+        "cz": "npx git-cz"
     },
     "private": true,
     "dependencies": {
@@ -14,6 +15,7 @@
         "@nestjs/platform-express": "^10.0.2",
         "axios": "^1.6.0",
         "kysely": "^0.27.4",
+        "nestjs-kysely": "^1.0.0",
         "pg": "^8.13.0",
         "reflect-metadata": "^0.1.13",
         "rxjs": "^7.8.0"
