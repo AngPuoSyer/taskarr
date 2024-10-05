@@ -1,24 +1,26 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "rootDir": ".",
-        "sourceMap": true,
-        "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "target": "es2015",
-        "module": "esnext",
-        "lib": ["es2020", "dom"],
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "@taskarr/db": ["db/src/index.ts"],
-            "@taskarr/docker": ["docker/src/index.ts"],
-            "@taskarr/task": ["package/task/src/index.ts"]
-        }
-    },
-    "exclude": ["node_modules", "tmp"]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"lib": ["es2020", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@taskarr/common": ["package/common/src/index.ts"],
+			"@taskarr/db": ["db/src/index.ts"],
+			"@taskarr/docker": ["docker/src/index.ts"],
+			"@taskarr/task": ["package/task/src/index.ts"],
+			"@taskarr/typebox": ["typebox/src/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tmp"]
 }
