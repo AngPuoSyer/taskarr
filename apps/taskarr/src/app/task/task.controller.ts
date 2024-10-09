@@ -38,6 +38,33 @@ const CreateTaskResponseDtoSchema = generateSuccessResponseSchema(
 	})
 )
 export type CreateTaskResponseDto = Static<typeof CreateTaskResponseDtoSchema>
+
+const UpdateTaskSchemaStore = {
+	id: TaskSchemaStore.id,
+	name: Type.Optional(TaskSchemaStore.name),
+	description: Type.Optional(TaskSchemaStore.description),
+	dueDate: Type.Optional(
+		Type.Union([
+			Type.Null(),
+			dateInputSchema,
+		], {
+			description: 'Field to update due date. Remove from db if null'
+		})
+	)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const UpdateTaskDtoParamSchema = Type.ClosedObject({
+	id: UpdateTaskSchemaStore.id
+})
+export type UpdateTaskDtoParam = Static<typeof UpdateTaskDtoParamSchema>
+
+const UpdateTaskDtoBodySchema = Type.Partial(Type.Object({
+	name: UpdateTaskSchemaStore.name,
+	description: UpdateTaskSchemaStore.description,
+	dueDate: UpdateTaskSchemaStore.dueDate
+}))
+export type UpdateTaskDtoBody = Static<typeof UpdateTaskDtoBodySchema>
 @Controller('task')
 export class TaskController {
 	constructor(
@@ -88,6 +115,41 @@ export class TaskController {
 			ok: true, data: { task: TaskPresenterMapper.fromDomain(entity) }
 		}
 	}
+
+	@HttpEndpointWithDefault({
+		method: 'PATCH',
+		path: ':id',
+		validate: {
+			request: [...mapParamSchema({
+				id: UpdateTaskSchemaStore.id
+			}), {
+				type: 'body',
+				schema: UpdateTaskDtoBodySchema
+			}],
+			response: {
+				schema: GetTaskResponseDtoSchema,
+				stripUnknownProps: true
+			}
+		},
+	})
+	async updateTask(@Param('id') taskId: DeleteTaskDto['id'], @Body() body: UpdateTaskDtoBody): Promise<GetTaskResponseDto> {
+		const entity = await this.taskService.updateTask({
+			taskId,
+			task: {
+				name: body.name,
+				description: body.description,
+				dueDate: body.dueDate ? new Date(body.dueDate) : body.dueDate as null | undefined
+			}
+		})
+
+		return {
+			ok: true,
+			data: {
+				task: TaskPresenterMapper.fromDomain(entity)
+			}
+		}
+	}
+
 
 	mapDueDate(dueDate: string | null) {
 		return dueDate ? new Date(dueDate) : dueDate as null | undefined
