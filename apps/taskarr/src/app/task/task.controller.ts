@@ -65,6 +65,22 @@ const UpdateTaskDtoBodySchema = Type.Partial(Type.Object({
 	dueDate: UpdateTaskSchemaStore.dueDate
 }))
 export type UpdateTaskDtoBody = Static<typeof UpdateTaskDtoBodySchema>
+
+const DeleteTaskDtoSchemaStore = {
+	id: TaskSchemaStore.id
+}
+
+const DeleteTaskResponseDtoSchema = generateSuccessResponseSchema(
+	Type.ClosedObject({
+		taskId: TaskSchemaStore.id
+	})
+)
+export type DeleteTaskResponseDto = Static<typeof DeleteTaskResponseDtoSchema>
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const DeleteTaskDtoSchema = Type.ClosedObject(DeleteTaskDtoSchemaStore)
+export type DeleteTaskDto = Static<typeof DeleteTaskDtoSchema>
+
 @Controller('task')
 export class TaskController {
 	constructor(
@@ -150,6 +166,29 @@ export class TaskController {
 		}
 	}
 
+	@HttpEndpointWithDefault({
+		method: 'DELETE',
+		path: ':id',
+		validate: {
+			request: mapParamSchema(DeleteTaskDtoSchemaStore),
+			response: {
+				schema: DeleteTaskResponseDtoSchema,
+				stripUnknownProps: true
+			}
+		},
+		responseCode: 200,
+	})
+	async deleteTask(@Param('id') taskId: DeleteTaskDto['id']): Promise<DeleteTaskResponseDto> {
+		await this.taskService.deleteTask({ id: taskId })
+
+		return {
+			ok: true,
+			data: {
+				taskId: taskId
+			}
+		}
+
+	}
 
 	mapDueDate(dueDate: string | null) {
 		return dueDate ? new Date(dueDate) : dueDate as null | undefined
