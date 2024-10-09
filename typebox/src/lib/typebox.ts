@@ -71,8 +71,6 @@ export class CustomTypeBuilder extends JavaScriptTypeBuilder {
 	}
 }
 
-// TODO: This is a different instance of Type from the one in @sinclair/typebox
-// Perhaps we can reuse the instance e.g. using TypeRegistry
 export const Type = new CustomTypeBuilder();
 export type Static<
 	T extends TSchema,
@@ -213,5 +211,4 @@ export function IsDateTime(value: string, strictTimeZone?: boolean): boolean {
 // const AJV_FAST_DATE_TIME_FORMAT =
 // 	/^\d\d\d\d-[0-1]\d-[0-3]\dt(?:[0-2]\d:[0-5]\d:[0-5]\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d\d(?::?\d\d)?)$/i;
 
-TypeSystem.Format('date-time', (value) => IsDateTime(value, true));
 TypeSystem.Format('date-time', (value) => IsDateTime(value, true));

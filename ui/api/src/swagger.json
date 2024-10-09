@@ -1,0 +1,541 @@
+{
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/v1/task": {
+			"post": {
+				"operationId": "TaskController_createTask",
+				"summary": "",
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTaskBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateTaskResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/task/{id}": {
+			"get": {
+				"operationId": "TaskController_getTask",
+				"summary": "",
+				"parameters": [
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"minLength": 24,
+							"maxLength": 24,
+							"pattern": "^[a-fA-F0-9]{24}$",
+							"description": "MongoDB ObjectID",
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetTaskResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "TaskController_updateTask",
+				"summary": "",
+				"parameters": [
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"minLength": 24,
+							"maxLength": 24,
+							"pattern": "^[a-fA-F0-9]{24}$",
+							"description": "MongoDB ObjectID",
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateTaskBody"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateTaskResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "TaskController_deleteTask",
+				"summary": "",
+				"parameters": [
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"minLength": 24,
+							"maxLength": 24,
+							"pattern": "^[a-fA-F0-9]{24}$",
+							"description": "MongoDB ObjectID",
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteTaskResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/tasks": {
+			"get": {
+				"operationId": "TasksController_getTasks",
+				"summary": "",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetTasksResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"info": {
+		"title": "Taskarr API",
+		"description": "API for Taskarr",
+		"version": "1.0",
+		"contact": {}
+	},
+	"tags": [],
+	"servers": [],
+	"components": {
+		"schemas": {
+			"CreateTaskBody": {
+				"additionalProperties": false,
+				"type": "object",
+				"properties": {
+					"name": {
+						"minLength": 1,
+						"maxLength": 100,
+						"type": "string"
+					},
+					"description": {
+						"maxLength": 1000,
+						"default": "",
+						"type": "string"
+					},
+					"dueDate": {
+						"format": "date-time",
+						"type": "string"
+					}
+				},
+				"required": [
+					"name"
+				]
+			},
+			"CreateTaskResponse": {
+				"additionalProperties": false,
+				"type": "object",
+				"properties": {
+					"ok": {
+						"const": true,
+						"type": "boolean"
+					},
+					"data": {
+						"additionalProperties": false,
+						"type": "object",
+						"properties": {
+							"task": {
+								"additionalProperties": false,
+								"type": "object",
+								"properties": {
+									"id": {
+										"minLength": 24,
+										"maxLength": 24,
+										"pattern": "^[a-fA-F0-9]{24}$",
+										"description": "MongoDB ObjectID",
+										"type": "string"
+									},
+									"name": {
+										"minLength": 1,
+										"maxLength": 100,
+										"type": "string"
+									},
+									"description": {
+										"maxLength": 1000,
+										"default": "",
+										"type": "string"
+									},
+									"dueDate": {
+										"type": "Date"
+									},
+									"status": {
+										"anyOf": [
+											{
+												"const": 0,
+												"type": "number"
+											},
+											{
+												"const": 1,
+												"type": "number"
+											},
+											{
+												"const": 2,
+												"type": "number"
+											}
+										]
+									},
+									"createdAt": {
+										"type": "Date"
+									}
+								},
+								"required": [
+									"id",
+									"name",
+									"status",
+									"createdAt"
+								]
+							}
+						},
+						"required": [
+							"task"
+						]
+					}
+				},
+				"required": [
+					"ok",
+					"data"
+				]
+			},
+			"GetTaskResponse": {
+				"additionalProperties": false,
+				"type": "object",
+				"properties": {
+					"ok": {
+						"const": true,
+						"type": "boolean"
+					},
+					"data": {
+						"additionalProperties": false,
+						"type": "object",
+						"properties": {
+							"task": {
+								"additionalProperties": false,
+								"type": "object",
+								"properties": {
+									"id": {
+										"minLength": 24,
+										"maxLength": 24,
+										"pattern": "^[a-fA-F0-9]{24}$",
+										"description": "MongoDB ObjectID",
+										"type": "string"
+									},
+									"name": {
+										"minLength": 1,
+										"maxLength": 100,
+										"type": "string"
+									},
+									"description": {
+										"maxLength": 1000,
+										"default": "",
+										"type": "string"
+									},
+									"dueDate": {
+										"type": "Date"
+									},
+									"status": {
+										"anyOf": [
+											{
+												"const": 0,
+												"type": "number"
+											},
+											{
+												"const": 1,
+												"type": "number"
+											},
+											{
+												"const": 2,
+												"type": "number"
+											}
+										]
+									},
+									"createdAt": {
+										"type": "Date"
+									}
+								},
+								"required": [
+									"id",
+									"name",
+									"status",
+									"createdAt"
+								]
+							}
+						},
+						"required": [
+							"task"
+						]
+					}
+				},
+				"required": [
+					"ok",
+					"data"
+				]
+			},
+			"UpdateTaskBody": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"minLength": 1,
+						"maxLength": 100,
+						"type": "string"
+					},
+					"description": {
+						"maxLength": 1000,
+						"default": "",
+						"type": "string"
+					},
+					"dueDate": {
+						"description": "Field to update due date. Remove from db if null",
+						"anyOf": [
+							{
+								"type": "null"
+							},
+							{
+								"format": "date-time",
+								"type": "string"
+							}
+						]
+					}
+				}
+			},
+			"UpdateTaskResponse": {
+				"additionalProperties": false,
+				"type": "object",
+				"properties": {
+					"ok": {
+						"const": true,
+						"type": "boolean"
+					},
+					"data": {
+						"additionalProperties": false,
+						"type": "object",
+						"properties": {
+							"task": {
+								"additionalProperties": false,
+								"type": "object",
+								"properties": {
+									"id": {
+										"minLength": 24,
+										"maxLength": 24,
+										"pattern": "^[a-fA-F0-9]{24}$",
+										"description": "MongoDB ObjectID",
+										"type": "string"
+									},
+									"name": {
+										"minLength": 1,
+										"maxLength": 100,
+										"type": "string"
+									},
+									"description": {
+										"maxLength": 1000,
+										"default": "",
+										"type": "string"
+									},
+									"dueDate": {
+										"type": "Date"
+									},
+									"status": {
+										"anyOf": [
+											{
+												"const": 0,
+												"type": "number"
+											},
+											{
+												"const": 1,
+												"type": "number"
+											},
+											{
+												"const": 2,
+												"type": "number"
+											}
+										]
+									},
+									"createdAt": {
+										"type": "Date"
+									}
+								},
+								"required": [
+									"id",
+									"name",
+									"status",
+									"createdAt"
+								]
+							}
+						},
+						"required": [
+							"task"
+						]
+					}
+				},
+				"required": [
+					"ok",
+					"data"
+				]
+			},
+			"DeleteTaskResponse": {
+				"additionalProperties": false,
+				"type": "object",
+				"properties": {
+					"ok": {
+						"const": true,
+						"type": "boolean"
+					},
+					"data": {
+						"additionalProperties": false,
+						"type": "object",
+						"properties": {
+							"taskId": {
+								"minLength": 24,
+								"maxLength": 24,
+								"pattern": "^[a-fA-F0-9]{24}$",
+								"description": "MongoDB ObjectID",
+								"type": "string"
+							}
+						},
+						"required": [
+							"taskId"
+						]
+					}
+				},
+				"required": [
+					"ok",
+					"data"
+				]
+			},
+			"GetTasksResponse": {
+				"additionalProperties": false,
+				"type": "object",
+				"properties": {
+					"ok": {
+						"const": true,
+						"type": "boolean"
+					},
+					"data": {
+						"additionalProperties": false,
+						"type": "object",
+						"properties": {
+							"tasks": {
+								"type": "array",
+								"items": {
+									"additionalProperties": false,
+									"type": "object",
+									"properties": {
+										"id": {
+											"minLength": 24,
+											"maxLength": 24,
+											"pattern": "^[a-fA-F0-9]{24}$",
+											"description": "MongoDB ObjectID",
+											"type": "string"
+										},
+										"name": {
+											"minLength": 1,
+											"maxLength": 100,
+											"type": "string"
+										},
+										"description": {
+											"maxLength": 1000,
+											"default": "",
+											"type": "string"
+										},
+										"dueDate": {
+											"type": "Date"
+										},
+										"status": {
+											"anyOf": [
+												{
+													"const": 0,
+													"type": "number"
+												},
+												{
+													"const": 1,
+													"type": "number"
+												},
+												{
+													"const": 2,
+													"type": "number"
+												}
+											]
+										},
+										"createdAt": {
+											"type": "Date"
+										}
+									},
+									"required": [
+										"id",
+										"name",
+										"status",
+										"createdAt"
+									]
+								}
+							}
+						},
+						"required": [
+							"tasks"
+						]
+					}
+				},
+				"required": [
+					"ok",
+					"data"
+				]
+			}
+		}
+	}
+}
