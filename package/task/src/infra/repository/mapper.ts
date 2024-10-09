@@ -7,7 +7,7 @@ export class TaskRepositoryMapper {
 		return Buffer.from(id, 'hex')
 	}
 
-	static fromDomain(task: TaskEntity): Task {
+	static fromDomain(task: TaskEntity): Omit<Task, 'task_fts_vector'> {
 		return {
 			id: Buffer.from(task.props.id, 'hex'),
 			name: task.props.name,
@@ -18,7 +18,7 @@ export class TaskRepositoryMapper {
 		}
 	}
 
-	static toDomain(task: Task): TaskEntity {
+	static toDomain(task: Omit<Task, 'task_fts_vector'>): TaskEntity {
 		return new TaskEntity({
 			id: task.id.toString('hex'),
 			name: task.name,

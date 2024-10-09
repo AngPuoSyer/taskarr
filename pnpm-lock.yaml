@@ -63,8 +63,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(kysely@0.27.4)(reflect-metadata@0.1.14)
       nestjs-typebox:
-        specifier: 3.0.0-next.9
-        version: 3.0.0-next.9(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(@nestjs/swagger@7.4.2(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(reflect-metadata@0.1.14))(@sinclair/typebox@0.33.15)(rxjs@7.8.1)
+        specifier: 3.0.1
+        version: 3.0.1(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(@nestjs/swagger@7.4.2(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(reflect-metadata@0.1.14))(@sinclair/typebox@0.33.15)(rxjs@7.8.1)
       next:
         specifier: 14.2.3
         version: 14.2.3(@babel/core@7.25.7)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.4)
@@ -5469,8 +5469,8 @@ packages:
       kysely: 0.x
       reflect-metadata: ^0.1.13 || ^0.2.2
 
-  nestjs-typebox@3.0.0-next.9:
-    resolution: {integrity: sha512-CFyAEb3pa8htSI4yS1a/PJKEvGCB5WuVv1bofTV+Etd3Wyu46Au+RzzNRPkNNXNc89Ywy/BDnmhyZZnW6U2ZNQ==}
+  nestjs-typebox@3.0.1:
+    resolution: {integrity: sha512-3bmsSOGG9br7XxeJojxRBm35dAtuKH+eARdp3/kz/Zk34QQ+X0q5+QJuE/8yt89gKka5CeEEws8KioxGZF7fcA==}
     peerDependencies:
       '@nestjs/common': ^9.0.1 || ^10.0.3
       '@nestjs/core': ^9.0.1 || ^10.0.3
@@ -14665,7 +14665,7 @@ snapshots:
       kysely: 0.27.4
       reflect-metadata: 0.1.14
 
-  nestjs-typebox@3.0.0-next.9(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(@nestjs/swagger@7.4.2(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(reflect-metadata@0.1.14))(@sinclair/typebox@0.33.15)(rxjs@7.8.1):
+  nestjs-typebox@3.0.1(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(@nestjs/swagger@7.4.2(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/core@10.4.4)(reflect-metadata@0.1.14))(@sinclair/typebox@0.33.15)(rxjs@7.8.1):
     dependencies:
       '@nestjs/common': 10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1)
       '@nestjs/core': 10.4.4(@nestjs/common@10.4.4(reflect-metadata@0.1.14)(rxjs@7.8.1))(@nestjs/platform-express@10.4.4)(reflect-metadata@0.1.14)(rxjs@7.8.1)

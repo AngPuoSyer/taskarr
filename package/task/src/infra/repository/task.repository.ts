@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectKysely } from "nestjs-kysely";
-import { type Kysely } from "kysely";
+import { type Kysely, sql } from "kysely";
 import type { Db } from '@taskarr/db'
 import { TaskEntity } from "../../domain/task.entity";
 import { TaskRepositoryMapper } from "./mapper";
@@ -39,8 +39,30 @@ export class TaskRepository {
 		return task
 	}
 
-	async findAll(): Promise<TaskEntity[]> {
-		const tasks = await this.db.selectFrom('task').selectAll().execute()
+	async findAll(params?: {
+		query?: string
+		sortBy?: 'created_at' | 'updated_at' | 'due_date'
+		sortOrder?: 'asc' | 'desc'
+	}): Promise<TaskEntity[]> {
+		console.log(params)
+		let queryBuilder = this.db
+			.selectFrom('task')
+			.selectAll()
+		// .orderBy(params.sortBy, params.sortOrder)
+
+		if (params?.query) {
+			queryBuilder = queryBuilder.where(
+				'task_fts_vector',
+				'@@',
+				sql`plainto_tsquery(${params.query})`
+			)
+		}
+
+		if (params?.sortBy) {
+			queryBuilder = queryBuilder.orderBy(params.sortBy, params.sortOrder)
+		}
+
+		const tasks = await queryBuilder.execute()
 
 		const tasksEntity = []
 		for (const task of tasks) {
@@ -48,6 +70,14 @@ export class TaskRepository {
 		}
 
 		return tasksEntity
+	}
+
+	mapDateNullOrder(sortOrder: 'asc' | 'desc') {
+		if (sortOrder === 'asc') {
+			return sql`COALESCE(due_date, '9999-12-31')`
+		}
+
+		return sql`COALESCE(due_date, '0001-01-01')`
 	}
 
 	async updateOneById(id: string, task: {

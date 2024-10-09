@@ -30,7 +30,7 @@
 		"kysely": "^0.27.4",
 		"lodash": "^4.17.21",
 		"nestjs-kysely": "^1.0.0",
-		"nestjs-typebox": "3.0.0-next.9",
+		"nestjs-typebox": "3.0.1",
 		"next": "14.2.3",
 		"pg": "^8.13.0",
 		"react": "18.3.1",

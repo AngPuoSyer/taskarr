@@ -27,7 +27,6 @@ export class RequestExceptionUtil {
 		const errorMap = new Map();
 
 		for (const error of errors) {
-			console.log(error)
 			const path = error.path;
 			const val = errorMap.get(path);
 			if (val === undefined) {

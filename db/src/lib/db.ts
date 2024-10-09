@@ -1,20 +1,21 @@
 import type { Insertable, Updateable, Selectable } from "kysely"
 
 export interface BaseSchema {
-    created_at: Date,
-    updated_at: Date,
+	created_at: Date,
+	updated_at: Date,
 }
 
 export interface TaskTable extends BaseSchema {
-    id: Buffer,
-    name: string,
-    description?: string,
-    due_date?: Date,
+	id: Buffer,
+	name: string,
+	description?: string,
+	due_date?: Date,
+	task_fts_vector?: unknown,
 
 }
 
 export interface Db {
-    task: TaskTable
+	task: TaskTable
 }
 
 export type Task = Selectable<TaskTable>

@@ -14,9 +14,7 @@ import {
 import { HookFormInput } from '../common/HookFormInput'
 import { Static, Type } from '@taskarr/typebox'
 import {
-	UseDefaultServiceTaskControllerGetTaskKeyFn,
 	useDefaultServiceTaskControllerUpdateTask,
-	useDefaultServiceTasksControllerGetTasksKey,
 } from '@taskarr/ui/api'
 import { typeboxResolver } from '@hookform/resolvers/typebox'
 import { useQueryClient } from '@tanstack/react-query'
@@ -54,7 +52,6 @@ export function EditTaskFormModal(props: EditTaskFormModalProps) {
 	const api = useDefaultServiceTaskControllerUpdateTask({
 		// TODO: error handling
 		onSuccess: async () => {
-			console.log(UseDefaultServiceTaskControllerGetTaskKeyFn({ id: props.task.id }),)
 			// TODO: figure out how to invalidate only the task, generated code is not invalidating correctly
 			await queryClient.invalidateQueries()
 			props.onClose()
@@ -62,13 +59,13 @@ export function EditTaskFormModal(props: EditTaskFormModalProps) {
 	})
 
 	function onSubmit(values: EditTaskDto) {
-		let body: EditTaskDto = {}
+		const body: EditTaskDto = {}
 		let dueDate
 
-		for (const [key, value] of Object.entries(values)) {
+		for (const key in values) {
 			const k = key as keyof EditTaskDto
 			if (dirtyFields[k]) {
-				body[k] = values[k] as any
+				body[k] = values[k] as string
 			}
 		}
 

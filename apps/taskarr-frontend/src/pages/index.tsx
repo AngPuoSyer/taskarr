@@ -13,10 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { useDefaultServiceTasksControllerGetTasks } from '@taskarr/ui/api'
 import { CreateTaskFormModal, TaskStatusBadge } from '@taskarr/ui/components'
-import { mapDateToDateString } from 'apps/taskarr-frontend/mapper/data';
-import { mapTaskFromJSON } from 'apps/taskarr-frontend/mapper/task/task.mapper';
+import { mapTaskFromJSON } from '../../mapper/task/task.mapper';
 import Link from 'next/link';
 import { GrAdd } from "react-icons/gr";
+import { mapDateToDateString } from '../../mapper/data';
 
 export function Index() {
 	const { isOpen, onOpen, onClose } = useDisclosure()

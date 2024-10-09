@@ -35,9 +35,9 @@ describe(TaskPresenterMapper, () => {
 				id: id,
 				name: 'Task 1',
 				description: 'Description',
+				status: expect.any(Number),
 				dueDate: taskEntity.props.dueDate,
 				createdAt: taskEntity.props.createdAt,
-				updatedAt: taskEntity.props.updatedAt
 			})
 		})
 	})
