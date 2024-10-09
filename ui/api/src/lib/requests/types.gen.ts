@@ -118,6 +118,12 @@ export type TaskControllerDeleteTaskData = {
 
 export type TaskControllerDeleteTaskResponse = DeleteTaskResponse;
 
+export type TasksControllerGetTasksData = {
+    query?: string;
+    sortBy?: "createdAt" | "updatedAt" | "dueDate";
+    sortOrder?: "asc" | "desc";
+};
+
 export type TasksControllerGetTasksResponse = GetTasksResponse;
 
 export type $OpenApiTs = {
@@ -151,6 +157,7 @@ export type $OpenApiTs = {
     };
     '/api/v1/tasks': {
         get: {
+            req: TasksControllerGetTasksData;
             res: {
                 200: GetTasksResponse;
             };

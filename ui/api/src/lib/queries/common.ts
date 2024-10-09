@@ -11,7 +11,11 @@ export const UseDefaultServiceTaskControllerGetTaskKeyFn = ({ id }: {
 export type DefaultServiceTasksControllerGetTasksDefaultResponse = Awaited<ReturnType<typeof DefaultService.tasksControllerGetTasks>>;
 export type DefaultServiceTasksControllerGetTasksQueryResult<TData = DefaultServiceTasksControllerGetTasksDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useDefaultServiceTasksControllerGetTasksKey = "DefaultServiceTasksControllerGetTasks";
-export const UseDefaultServiceTasksControllerGetTasksKeyFn = (queryKey?: Array<unknown>) => [useDefaultServiceTasksControllerGetTasksKey, ...(queryKey ?? [])];
+export const UseDefaultServiceTasksControllerGetTasksKeyFn = ({ query, sortBy, sortOrder }: {
+  query?: string;
+  sortBy?: "createdAt" | "updatedAt" | "dueDate";
+  sortOrder?: "asc" | "desc";
+} = {}, queryKey?: Array<unknown>) => [useDefaultServiceTasksControllerGetTasksKey, ...(queryKey ?? [{ query, sortBy, sortOrder }])];
 export type DefaultServiceTaskControllerCreateTaskMutationResult = Awaited<ReturnType<typeof DefaultService.taskControllerCreateTask>>;
 export type DefaultServiceTaskControllerUpdateTaskMutationResult = Awaited<ReturnType<typeof DefaultService.taskControllerUpdateTask>>;
 export type DefaultServiceTaskControllerDeleteTaskMutationResult = Awaited<ReturnType<typeof DefaultService.taskControllerDeleteTask>>;

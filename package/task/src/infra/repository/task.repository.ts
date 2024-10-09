@@ -44,17 +44,15 @@ export class TaskRepository {
 		sortBy?: 'created_at' | 'updated_at' | 'due_date'
 		sortOrder?: 'asc' | 'desc'
 	}): Promise<TaskEntity[]> {
-		console.log(params)
 		let queryBuilder = this.db
 			.selectFrom('task')
 			.selectAll()
-		// .orderBy(params.sortBy, params.sortOrder)
 
 		if (params?.query) {
 			queryBuilder = queryBuilder.where(
 				'task_fts_vector',
 				'@@',
-				sql`plainto_tsquery(${params.query})`
+				sql`to_tsquery(${this.createPartialMatchQuery(params.query)})`
 			)
 		}
 
@@ -70,14 +68,6 @@ export class TaskRepository {
 		}
 
 		return tasksEntity
-	}
-
-	mapDateNullOrder(sortOrder: 'asc' | 'desc') {
-		if (sortOrder === 'asc') {
-			return sql`COALESCE(due_date, '9999-12-31')`
-		}
-
-		return sql`COALESCE(due_date, '0001-01-01')`
 	}
 
 	async updateOneById(id: string, task: {
@@ -104,5 +94,9 @@ export class TaskRepository {
 			.executeTakeFirst()
 
 		return value.numDeletedRows > 0
+	}
+
+	createPartialMatchQuery(query: string) {
+		return query.split(' ').map((char) => char + ':*').join(' | ')
 	}
 }

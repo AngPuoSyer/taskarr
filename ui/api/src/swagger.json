@@ -132,7 +132,56 @@
 			"get": {
 				"operationId": "TasksController_getTasks",
 				"summary": "",
-				"parameters": [],
+				"parameters": [
+					{
+						"name": "query",
+						"required": false,
+						"in": "query",
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "sortOrder",
+						"required": false,
+						"in": "query",
+						"schema": {
+							"default": "asc",
+							"anyOf": [
+								{
+									"const": "asc",
+									"type": "string"
+								},
+								{
+									"const": "desc",
+									"type": "string"
+								}
+							]
+						}
+					},
+					{
+						"name": "sortBy",
+						"required": false,
+						"in": "query",
+						"schema": {
+							"default": "createdAt",
+							"anyOf": [
+								{
+									"const": "createdAt",
+									"type": "string"
+								},
+								{
+									"const": "updatedAt",
+									"type": "string"
+								},
+								{
+									"const": "dueDate",
+									"type": "string"
+								}
+							]
+						}
+					}
+				],
 				"responses": {
 					"200": {
 						"content": {

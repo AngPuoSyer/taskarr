@@ -8,7 +8,8 @@
 		"migration:down": "npx kysely migrate:down --cwd ./db",
 		"cz": "npx git-cz",
 		"test:watch": "clear; echo '\\n👀 Watching for file changes\\n' && nx watch --all -- './run-spec-file.sh $NX_PROJECT_NAME $NX_FILE_CHANGES'",
-		"test:watch:skip-cache": "clear; echo '\\n👀 Watching for file changes\\n' && nx watch --all -- './run-spec-file-without-cache.sh $NX_PROJECT_NAME $NX_FILE_CHANGES'"
+		"test:watch:skip-cache": "clear; echo '\\n👀 Watching for file changes\\n' && nx watch --all -- './run-spec-file-without-cache.sh $NX_PROJECT_NAME $NX_FILE_CHANGES'",
+		"generate:api": "npx --package @7nohe/openapi-react-query-codegen openapi-rq -i ./ui/api/src/swagger.json -c axios -o ./ui/api/src/lib"
 	},
 	"private": true,
 	"dependencies": {

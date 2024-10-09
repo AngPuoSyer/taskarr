@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { TaskControllerCreateTaskData, TaskControllerCreateTaskResponse, TaskControllerGetTaskData, TaskControllerGetTaskResponse, TaskControllerUpdateTaskData, TaskControllerUpdateTaskResponse, TaskControllerDeleteTaskData, TaskControllerDeleteTaskResponse, TasksControllerGetTasksResponse } from './types.gen';
+import type { TaskControllerCreateTaskData, TaskControllerCreateTaskResponse, TaskControllerGetTaskData, TaskControllerGetTaskResponse, TaskControllerUpdateTaskData, TaskControllerUpdateTaskResponse, TaskControllerDeleteTaskData, TaskControllerDeleteTaskResponse, TasksControllerGetTasksData, TasksControllerGetTasksResponse } from './types.gen';
 
 export class DefaultService {
     /**
@@ -73,13 +73,22 @@ export class DefaultService {
     }
     
     /**
+     * @param data The data for the request.
+     * @param data.query
+     * @param data.sortOrder
+     * @param data.sortBy
      * @returns GetTasksResponse
      * @throws ApiError
      */
-    public static tasksControllerGetTasks(): CancelablePromise<TasksControllerGetTasksResponse> {
+    public static tasksControllerGetTasks(data: TasksControllerGetTasksData = {}): CancelablePromise<TasksControllerGetTasksResponse> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/v1/tasks'
+            url: '/api/v1/tasks',
+            query: {
+                query: data.query,
+                sortOrder: data.sortOrder,
+                sortBy: data.sortBy
+            }
         });
     }
     

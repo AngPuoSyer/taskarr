@@ -7,7 +7,11 @@ import * as Common from "./common";
 export const useDefaultServiceTaskControllerGetTask = <TData = Common.DefaultServiceTaskControllerGetTaskDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>({ id }: {
   id: string;
 }, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UseDefaultServiceTaskControllerGetTaskKeyFn({ id }, queryKey), queryFn: () => DefaultService.taskControllerGetTask({ id }) as TData, ...options });
-export const useDefaultServiceTasksControllerGetTasks = <TData = Common.DefaultServiceTasksControllerGetTasksDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UseDefaultServiceTasksControllerGetTasksKeyFn(queryKey), queryFn: () => DefaultService.tasksControllerGetTasks() as TData, ...options });
+export const useDefaultServiceTasksControllerGetTasks = <TData = Common.DefaultServiceTasksControllerGetTasksDefaultResponse, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>({ query, sortBy, sortOrder }: {
+  query?: string;
+  sortBy?: "createdAt" | "updatedAt" | "dueDate";
+  sortOrder?: "asc" | "desc";
+} = {}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<TData, TError>, "queryKey" | "queryFn">) => useQuery<TData, TError>({ queryKey: Common.UseDefaultServiceTasksControllerGetTasksKeyFn({ query, sortBy, sortOrder }, queryKey), queryFn: () => DefaultService.tasksControllerGetTasks({ query, sortBy, sortOrder }) as TData, ...options });
 export const useDefaultServiceTaskControllerCreateTask = <TData = Common.DefaultServiceTaskControllerCreateTaskMutationResult, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<TData, TError, {
   requestBody: CreateTaskBody;
 }, TContext>, "mutationFn">) => useMutation<TData, TError, {

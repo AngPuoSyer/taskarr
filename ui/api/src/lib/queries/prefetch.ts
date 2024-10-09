@@ -6,4 +6,8 @@ import * as Common from "./common";
 export const prefetchUseDefaultServiceTaskControllerGetTask = (queryClient: QueryClient, { id }: {
   id: string;
 }) => queryClient.prefetchQuery({ queryKey: Common.UseDefaultServiceTaskControllerGetTaskKeyFn({ id }), queryFn: () => DefaultService.taskControllerGetTask({ id }) });
-export const prefetchUseDefaultServiceTasksControllerGetTasks = (queryClient: QueryClient) => queryClient.prefetchQuery({ queryKey: Common.UseDefaultServiceTasksControllerGetTasksKeyFn(), queryFn: () => DefaultService.tasksControllerGetTasks() });
+export const prefetchUseDefaultServiceTasksControllerGetTasks = (queryClient: QueryClient, { query, sortBy, sortOrder }: {
+  query?: string;
+  sortBy?: "createdAt" | "updatedAt" | "dueDate";
+  sortOrder?: "asc" | "desc";
+} = {}) => queryClient.prefetchQuery({ queryKey: Common.UseDefaultServiceTasksControllerGetTasksKeyFn({ query, sortBy, sortOrder }), queryFn: () => DefaultService.tasksControllerGetTasks({ query, sortBy, sortOrder }) });
