@@ -44,6 +44,12 @@ This application is built within a NX Monorepo
 
 ### Backend
 
+#### Tech Stack
+
+- NestJS (Express Wrapper with very powerful Dependency Injection)
+- Kysely (SQL Query Builder)
+- PostgreSQL
+
 #### Architecture Overview
 
 The backend code is written and structured based on Clean Architecture
@@ -65,6 +71,14 @@ One of the very important component in the backend system is Typebox. Typebox is
 The API in this application follows RESTFUL API design. RESTFUL API are simple and straight forward. But the simplistic nature might become a challenge when we try to scale as it offers little flexibility when it comes to splitting concerns. An alternative design would be RPC API design which offers better flexibility.
 
 ### Frontend
+
+#### Tech Stack
+
+- React
+- NextJS
+- ChakraUI
+- Tailwind
+- React Query
 
 #### Architecture Overview
 
