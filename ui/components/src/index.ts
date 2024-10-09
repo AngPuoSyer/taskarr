@@ -2,3 +2,4 @@
 
 export * from './lib/task/CreateForm';
 export * from './lib/task/EditForm';
+export * from './lib/task/StatusBadge';

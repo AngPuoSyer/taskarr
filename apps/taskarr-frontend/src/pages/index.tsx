@@ -12,9 +12,9 @@ import {
 	useDisclosure
 } from '@chakra-ui/react';
 import { useDefaultServiceTasksControllerGetTasks } from '@taskarr/ui/api'
-import { CreateTaskFormModal } from '@taskarr/ui/components'
+import { CreateTaskFormModal, TaskStatusBadge } from '@taskarr/ui/components'
 import { mapDateToDateString } from 'apps/taskarr-frontend/mapper/data';
-import { mapTaskFromJSON, mapTaskStatus } from 'apps/taskarr-frontend/mapper/task/task.mapper';
+import { mapTaskFromJSON } from 'apps/taskarr-frontend/mapper/task/task.mapper';
 import Link from 'next/link';
 import { GrAdd } from "react-icons/gr";
 
@@ -24,7 +24,7 @@ export function Index() {
 
 	return (
 		<>
-			<div className='mx-auto w-5/6 h-10/12'>
+			<div className='mx-auto w-5/6 h-10/12 mb-8'>
 				<Flex alignItems={'center'}>
 					<h1 className='text-4xl font-bold my-8'>Tasks</h1>
 					<Spacer />
@@ -50,7 +50,7 @@ export function Index() {
 											className='contents cursor-pointer'>
 											<Tr key={mappedTask.id}>
 												<Td>{mappedTask.name}</Td>
-												<Td>{mapTaskStatus(mappedTask.status)}</Td>
+												<Td><TaskStatusBadge status={mappedTask.status} /></Td>
 												<Td>{mappedTask.dueDate ? mapDateToDateString(mappedTask.dueDate) : 'No Due Date'}</Td>
 												<Td>{mapDateToDateString(mappedTask.createdAt)}</Td>
 											</Tr>
