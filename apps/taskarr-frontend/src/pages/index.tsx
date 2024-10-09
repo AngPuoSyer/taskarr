@@ -1,16 +1,34 @@
-import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
+import {
+	Button,
+	Flex,
+	Spacer,
+	Table,
+	TableContainer,
+	Tbody,
+	Td,
+	Th,
+	Thead,
+	Tr,
+	useDisclosure
+} from '@chakra-ui/react';
 import { useDefaultServiceTasksControllerGetTasks } from '@taskarr/ui/api'
+import { CreateTaskFormModal } from '@taskarr/ui/components'
 import { mapTaskStatus } from 'apps/taskarr-frontend/mapper/task/task.mapper';
-import Link from 'next/link'
-
+import Link from 'next/link';
+import { GrAdd } from "react-icons/gr";
 
 export function Index() {
-	const { data } = useDefaultServiceTasksControllerGetTasks(['tasks'], {})
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { data } = useDefaultServiceTasksControllerGetTasks()
 
 	return (
 		<>
 			<div className='mx-auto w-5/6 h-10/12'>
-				<h1 className='text-4xl font-bold my-8'>Tasks</h1>
+				<Flex alignItems={'center'}>
+					<h1 className='text-4xl font-bold my-8'>Tasks</h1>
+					<Spacer />
+					<Button leftIcon={<GrAdd />} colorScheme='blue' onClick={onOpen}>Create</Button>
+				</Flex>
 				<TableContainer>
 					<Table>
 						<Thead>
@@ -38,6 +56,7 @@ export function Index() {
 						</Tbody>
 					</Table>
 				</TableContainer>
+				<CreateTaskFormModal isOpen={isOpen} onClose={onClose} isCentered />
 			</div>
 		</>
 	);
