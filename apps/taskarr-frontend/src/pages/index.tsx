@@ -13,7 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { useDefaultServiceTasksControllerGetTasks } from '@taskarr/ui/api'
 import { CreateTaskFormModal } from '@taskarr/ui/components'
-import { mapTaskStatus } from 'apps/taskarr-frontend/mapper/task/task.mapper';
+import { mapDateToDateString } from 'apps/taskarr-frontend/mapper/data';
+import { mapTaskFromJSON, mapTaskStatus } from 'apps/taskarr-frontend/mapper/task/task.mapper';
 import Link from 'next/link';
 import { GrAdd } from "react-icons/gr";
 
@@ -41,18 +42,21 @@ export function Index() {
 						</Thead>
 						<Tbody>
 							{
-								data?.data.tasks.map(task => (
-									<Link href={`/${task.id}`}
-										key={task.id}
-										className='contents cursor-pointer'>
-										<Tr key={task.id}>
-											<Td>{task.name}</Td>
-											<Td>{mapTaskStatus(task.status)}</Td>
-											<Td>{task.dueDate ? new Date(task.dueDate).toISOString() : 'No due date'}</Td>
-											<Td>{new Date(task.createdAt).toISOString()}</Td>
-										</Tr>
-									</Link>
-								))
+								data?.data.tasks.map(task => {
+									const mappedTask = mapTaskFromJSON(task)
+									return (
+										<Link href={`/${task.id}`}
+											key={task.id}
+											className='contents cursor-pointer'>
+											<Tr key={mappedTask.id}>
+												<Td>{mappedTask.name}</Td>
+												<Td>{mapTaskStatus(mappedTask.status)}</Td>
+												<Td>{mappedTask.dueDate ? mapDateToDateString(mappedTask.dueDate) : 'No Due Date'}</Td>
+												<Td>{mapDateToDateString(mappedTask.createdAt)}</Td>
+											</Tr>
+										</Link>
+									)
+								})
 							}
 						</Tbody>
 					</Table>
