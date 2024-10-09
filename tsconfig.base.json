@@ -17,7 +17,6 @@
 		"paths": {
 			"@taskarr/common": ["package/common/src/index.ts"],
 			"@taskarr/db": ["db/src/index.ts"],
-			"@taskarr/docker": ["docker/src/index.ts"],
 			"@taskarr/task": ["package/task/src/index.ts"],
 			"@taskarr/typebox": ["typebox/src/index.ts"],
 			"@taskarr/ui/api": ["ui/api/src/index.ts"],

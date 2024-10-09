@@ -6,7 +6,6 @@ export const ResponseSuccessSchema = Type.ClosedObject({
 	ok: Type.Literal(true),
 })
 
-
 export type ResponseSuccess = Static<typeof ResponseSuccessSchema>
 
 export function generateSuccessResponseSchema(schema: TSchema): TSchema {

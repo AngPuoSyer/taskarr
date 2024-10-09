@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChakraProvider } from '@chakra-ui/react'
 import { DefaultErrorFunction, SetErrorFunction } from "@sinclair/typebox/errors";
 
-OpenAPIConfig.BASE = 'http://localhost:3000';
+OpenAPIConfig.BASE = process.env.BACKEND_URL as string
 
 SetErrorFunction((error) => {
 	return error?.schema?.errorMessage ?? DefaultErrorFunction(error);
