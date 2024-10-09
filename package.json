@@ -9,7 +9,8 @@
 		"cz": "npx git-cz",
 		"test:watch": "clear; echo '\\n👀 Watching for file changes\\n' && nx watch --all -- './run-spec-file.sh $NX_PROJECT_NAME $NX_FILE_CHANGES'",
 		"test:watch:skip-cache": "clear; echo '\\n👀 Watching for file changes\\n' && nx watch --all -- './run-spec-file-without-cache.sh $NX_PROJECT_NAME $NX_FILE_CHANGES'",
-		"generate:api": "npx --package @7nohe/openapi-react-query-codegen openapi-rq -i ./ui/api/src/swagger.json -c axios -o ./ui/api/src/lib"
+		"generate:api": "npx --package @7nohe/openapi-react-query-codegen openapi-rq -i ./ui/api/src/swagger.json -c axios -o ./ui/api/src/lib",
+		"docker:build": "nx run-many --target container"
 	},
 	"private": true,
 	"dependencies": {
@@ -27,6 +28,7 @@
 		"axios": "^1.6.0",
 		"bson": "^6.8.0",
 		"dayjs": "^1.11.13",
+		"dotenv": "^16.4.5",
 		"framer-motion": "^11.11.4",
 		"kysely": "^0.27.4",
 		"lodash": "^4.17.21",
@@ -47,6 +49,7 @@
 		"@eslint/js": "^9.8.0",
 		"@nestjs/schematics": "^10.0.1",
 		"@nestjs/testing": "^10.0.2",
+		"@nx-tools/nx-container": "^6.0.4",
 		"@nx/eslint": "19.8.3",
 		"@nx/eslint-plugin": "19.8.3",
 		"@nx/jest": "19.8.3",

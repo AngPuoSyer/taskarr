@@ -4,6 +4,12 @@
 	"sourceRoot": "apps/taskarr-frontend",
 	"projectType": "application",
 	"tags": [],
-	"// targets": "to see all targets run: nx show project taskarr-frontend --web",
-	"targets": {}
+	"targets": {
+		"container": {
+			"dependsOn": [
+				"build"
+			],
+			"command": "docker build -f apps/taskarr-frontend/Dockerfile . -t taskarr-frontend"
+		}
+	}
 }

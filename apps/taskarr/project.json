@@ -1,34 +1,34 @@
 {
-  "name": "taskarr",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/taskarr/src",
-  "projectType": "application",
-  "tags": [],
-  "targets": {
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": [
-        "build"
-      ],
-      "options": {
-        "buildTarget": "taskarr:build",
-        "runBuildTargetDependencies": false
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "taskarr:build:development"
-        },
-        "production": {
-          "buildTarget": "taskarr:build:production"
-        }
-      }
-    },
-    "docker-build": {
-      "dependsOn": [
-        "build"
-      ],
-      "command": "docker build -f apps/taskarr/Dockerfile . -t taskarr"
-    }
-  }
+	"name": "taskarr",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/taskarr/src",
+	"projectType": "application",
+	"tags": [],
+	"targets": {
+		"serve": {
+			"executor": "@nx/js:node",
+			"defaultConfiguration": "development",
+			"dependsOn": [
+				"build"
+			],
+			"options": {
+				"buildTarget": "taskarr:build",
+				"runBuildTargetDependencies": false
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "taskarr:build:development"
+				},
+				"production": {
+					"buildTarget": "taskarr:build:production"
+				}
+			}
+		},
+		"container": {
+			"dependsOn": [
+				"build"
+			],
+			"command": "docker build -f apps/taskarr/Dockerfile . -t taskarr"
+		}
+	}
 }
