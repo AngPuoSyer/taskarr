@@ -1,4 +1,5 @@
-import { ObjectId } from './object-id'
+import { Value } from '@sinclair/typebox/value'
+import { ObjectId, ObjectIdSchema } from './object-id'
 describe(ObjectId, () => {
 	describe('.create', () => {
 		it('should create object id buffer from a string', () => {
@@ -12,6 +13,13 @@ describe(ObjectId, () => {
 			const objectId = ObjectId.create()
 			expect(objectId).toBeInstanceOf(Buffer)
 			expect(objectId.toString('hex')).toHaveLength(24)
+		})
+	})
+
+	describe('schema', () => {
+		it('should validate if objectId is in valid object id format', () => {
+			const id = '1234567890ABCDEF00000000'
+			expect(Value.Check(ObjectIdSchema, id)).toBe(true)
 		})
 	})
 })
