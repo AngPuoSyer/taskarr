@@ -19,7 +19,11 @@
 			"@taskarr/db": ["db/src/index.ts"],
 			"@taskarr/docker": ["docker/src/index.ts"],
 			"@taskarr/task": ["package/task/src/index.ts"],
-			"@taskarr/typebox": ["typebox/src/index.ts"]
+			"@taskarr/typebox": ["typebox/src/index.ts"],
+			"@taskarr/ui/api": ["ui/api/src/index.ts"],
+			"@taskarr/ui/api/server": ["ui/api/src/server.ts"],
+			"@taskarr/ui/components": ["ui/components/src/index.ts"],
+			"@taskarr/ui/components/server": ["ui/components/src/server.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
