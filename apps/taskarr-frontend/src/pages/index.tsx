@@ -43,6 +43,7 @@ export function Index() {
 							{
 								data?.data.tasks.map(task => (
 									<Link href={`/${task.id}`}
+										key={task.id}
 										className='contents cursor-pointer'>
 										<Tr key={task.id}>
 											<Td>{task.name}</Td>
